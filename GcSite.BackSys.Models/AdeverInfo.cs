@@ -38,5 +38,9 @@ namespace GcSite.BackSys.Models
         /// 广告类型(外键)
         /// </summary>
         public virtual AdverType Type { get; set; }
+        /// <summary>
+        /// 创建人(外键)
+        /// </summary>
+        public virtual UserInfo User { get; set; }
     }
 }

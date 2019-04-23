@@ -21,6 +21,7 @@ namespace GcSite.BackSys.Models
         /// <summary>
         /// 用户登录密码
         /// </summary>
+        [Required(ErrorMessage = "登录密码不能为空")]
         [Display(Name = "登录密码")]
         public string LoginPwd { get; set; }
         /// <summary>
@@ -28,6 +29,11 @@ namespace GcSite.BackSys.Models
         /// </summary>
         [Display(Name = "用户昵称")]
         public string UserRealName { get; set; }
+        /// <summary>
+        /// 用户头像
+        /// </summary>
+        [Display(Name = "用户头像")]
+        public string UserPortrait { get; set; }
         /// <summary>
         /// 用户年龄
         /// </summary>

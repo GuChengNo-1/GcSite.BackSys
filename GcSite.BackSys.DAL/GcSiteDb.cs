@@ -64,5 +64,9 @@ namespace GcSite.BackSys.DAL
         #region 栏目模块
         public IDbSet<Programa> Programas { get; set; }
         #endregion
+
+        #region 法律申明
+
+        #endregion
     }
 }

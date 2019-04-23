@@ -148,7 +148,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConsultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,17 +304,17 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Consult\List.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Product\Type.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\SysAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -333,8 +336,12 @@
       <Project>{53a69a6a-de15-4480-add0-49b71458a03c}</Project>
       <Name>GcSite.BackSys.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GcSite.BackSys.Common\GcSite.BackSys.Common.csproj">
+      <Project>{5e614e89-3011-4129-831c-645d89686d66}</Project>
+      <Name>GcSite.BackSys.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GcSite.BackSys.DAL\GcSite.BackSys.DAL.csproj">
-      <Project>{3359977a-8de0-4929-ac85-15205f9e0ef1}</Project>
+      <Project>{3359977A-8DE0-4929-AC85-15205F9E0EF1}</Project>
       <Name>GcSite.BackSys.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\GcSite.BackSys.Models\GcSite.BackSys.Models.csproj">
