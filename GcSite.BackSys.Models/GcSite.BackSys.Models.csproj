@@ -60,6 +60,7 @@
     <Compile Include="Recruited.cs" />
     <Compile Include="RmationImg.cs" />
     <Compile Include="SmClass.cs" />
+    <Compile Include="Statement.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>

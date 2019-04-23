@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("GcSite.BackSys.UI")]
-[assembly: AssemblyCopyright("版权所有(C) Microsoft 2019")]
+[assembly: AssemblyCopyright("版权所有(C) Shanghai GuCheng 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
