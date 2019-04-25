@@ -150,7 +150,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConsultController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
