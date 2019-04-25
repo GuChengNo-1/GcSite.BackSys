@@ -34,6 +34,6 @@ namespace GcSite.BackSys.Models
         /// 发布人(外键)
         /// </summary>
         [Display(Name = "发布人")]
-        public UserInfo User { get; set; }
+        public virtual UserInfo User { get; set; }
     }
 }

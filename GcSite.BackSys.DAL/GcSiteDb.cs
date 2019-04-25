@@ -15,7 +15,7 @@ namespace GcSite.BackSys.DAL
             : base("connStr")
         {
             //当models发生改变时修改数据库
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<GcSiteDb, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<GcSiteDb, Configuration>());
             //Update-Database
         }
 
@@ -66,7 +66,7 @@ namespace GcSite.BackSys.DAL
         #endregion
 
         #region 法律申明
-
+        public IDbSet<Statement> Statement { get; set; }
         #endregion
     }
 }

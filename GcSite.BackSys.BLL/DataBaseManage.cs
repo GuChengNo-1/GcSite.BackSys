@@ -31,7 +31,7 @@ namespace GcSite.BackSys.BLL
         public static void SetInitializer()
         {
             //当models发生改变时修改数据库
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<GcSiteDb, GcSite.BackSys.DAL.Migrations.Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<GcSiteDb, GcSite.BackSys.DAL.Migrations.Configuration>());
             //var dbMigrator = new DbMigrator(new GcSite.BackSys.DAL.Migrations.Configuration());
             //dbMigrator.Update();
         }

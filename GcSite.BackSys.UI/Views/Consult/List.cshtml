@@ -12,8 +12,6 @@
     <link href="~/Content/layui/layui/css/layui.css" rel="stylesheet" />
     <link href="~/Content/css/tai.css" rel="stylesheet" />
     <script src="~/Content/js/jquery.min.js"></script>
-
-
 </head>
 <body layadmin-themealias="default" class="layui-layout-body" style="">
     <div id="LAY_app" class="layadmin-tabspage-none">
@@ -238,51 +236,39 @@
                                     <div class="layui-inline">
                                         <label class="layui-form-label">文章ID</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                            <input type="text" id="consult_id" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">作者</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
+                                            <input type="text" id="consult_author" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">标题</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                                            <input type="text" id="consult_title" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
                                         </div>
                                     </div>
                                     <div class="layui-inline">
                                         <label class="layui-form-label">文章标签</label>
+                                        <div class="layui-input-inline" id="change_type">
+                                            <select id="consult_lg" name="consult_lg" lay-filter="consult_lg"></select>
+                                        </div>
                                         <div class="layui-input-inline">
-                                            <select name="label">
-                                                <option value="">请选择标签</option>
-                                                <option value="0">美食</option>
-                                                <option value="1">新闻</option>
-                                                <option value="2">八卦</option>
-                                                <option value="3">体育</option>
-                                                <option value="4">音乐</option>
-                                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择标签" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择标签</dd><dd lay-value="0" class="">美食</dd><dd lay-value="1" class="">新闻</dd><dd lay-value="2" class="">八卦</dd><dd lay-value="3" class="">体育</dd><dd lay-value="4" class="">音乐</dd></dl></div>
+                                            <select id="consult_sm" name="consult_sm" lay-filter="consult_sm"></select>
                                         </div>
                                     </div>
                                     <div class="layui-inline">
-                                        <button class="layui-btn layuiadmin-btn-list" lay-submit="" lay-filter="LAY-app-contlist-search">
+                                        <button id="consult_btn" class="layui-btn layuiadmin-btn-list" lay-submit="" lay-filter="LAY-app-contlist-search">
                                             <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="layui-card-body">
-                                <div style="padding-bottom: 10px;">
-                                    <button class="layui-btn layuiadmin-btn-list" data-type="batchdel">删除</button>
-                                    <button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>
-                                </div>
-
-                                <table class="layui-hide" id="test"></table>
-
-
+                                <table class="layui-hide" id="consult_list" lay-filter="consult_list"></table>
                             </div>
                         </div>
                     </div>
@@ -296,41 +282,213 @@
     </div>
     <script src="~/Content/layui/layui/layui.js"></script>
     <script>
-    layui.config({
-        base: '../dist/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
-        ,version: '1.2.1'
-    }).use('index');
-
-    layui.use('element', function(){
-        var element = layui.element;
-
-    });
-    layui.use('table', function(){
-        var table = layui.table;
-
-        table.render({
-            elem: '#test'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {type:'checkbox'}
-                ,{field:'id', title: '文章ID', sort: true}
-                ,{field:'username', title: '文章标签'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'sex', title: '文章标题', sort: true}
-                ,{field:'city', title: '作者'}
-                ,{field:'sign', title: '上传时间', sort: true }
-                ,{field:'classify', title: '发布状态', align: 'center'} //单元格内容水平居中
-                ,{field:'experience', title: '操作', sort: true, align: 'right'} //单元格内容水平居中
-            ]]
+        //将时间戳转换为日期时间
+        function fmtDate(obj) {
+            var dateVal = obj + "";
+            if (obj != null) {
+                var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var form_temp = "", form_table = "";
+        layui.use('form', function () {
+            form_temp = layui.form;
+            form_temp.on('select(consult_lg)', function (data) {
+                get_consult_sm();
+            });
         });
-    });
+        $(function () {
+            get_consult_lg();
+        });
+        function get_consult_lg() {
+            $.getJSON(
+                "/Consult/GetLgData",
+                function (data) {
+                    $("<option></option>").val("0").text("请选择标签").appendTo($("#consult_lg"));
+                    for (var i = 0; i < data.length; i++) {
+                        $("<option></option>").val(data[i].Id).text(data[i].LgName).appendTo($("#consult_lg"));
+                    }
+                    get_consult_sm();
+                });
+        }
+        function get_consult_sm() {
+            $("#consult_sm").empty();
+            $.getJSON(
+                "/Consult/GetSmData",
+                { lg_Id: $("#consult_lg").val() },
+                function (data) {
+                    $("<option></option>").val("0").text("请选择标签").appendTo($("#consult_sm"));
+                    for (var i = 0; i < data.length; i++) {
+                        $("<option></option>").val(data[i].Id).text(data[i].SmName).appendTo($("#consult_sm"));
+                    }
+                    form_temp.render();
+                });
+        }
+    </script>
+
+    <script>
+        layui.config({
+            base: '../dist/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
+            , version: '1.2.1'
+        }).use('index');
+
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+        layui.use('table', function () {
+            form_table = layui.table;
+
+            form_table.render({
+                elem: '#consult_list'
+                , url: '/Consult/List/'
+                , method: 'post'
+                , toolbar: '#toolbarDemo'
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[
+                    { type: 'checkbox' }
+                    , { field: 'Id', title: '文章ID', sort: true }
+                    , { field: 'Sm_Name', title: '文章标签', align: 'center', templet: '#table_sm' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    , { field: 'Title', title: '文章标题', align: 'center' }
+                    , { field: 'User_Name', title: '作者', align: 'center' }
+                    , { field: 'ReleaseDate', title: '上传时间', templet: '#ReleaseDate', align: 'center' }
+                    , { field: 'UpdateDate', title: '最后修改时间', templet: '#UpdateDate', align: 'center' }
+                    , { field: 'R_Str', title: '是否推荐', align: 'center' } //单元格内容水平居中
+                    , { field: 'Describe', title: '文章内容' } //单元格内容水平居中
+                    , { field: 'Right', fixed: 'right', title: '操作', align: 'right', toolbar: '#barDemo', align: 'center' } //单元格内容水平居中
+                ]]
+                , page: true
+            });
+            $("#consult_btn").click(function () {
+                form_table.reload('consult_list', {
+                    where: {
+                        consult_id: $('#consult_id').val(),
+                        consult_author: $('#consult_author').val(),
+                        consult_title: $('#consult_title').val(),
+                        consult_sm: $('#consult_sm').val(),
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            })
+            //头工具栏事件
+            form_table.on('toolbar(consult_list)', function (obj) {
+                var checkStatus = form_table.checkStatus(obj.config.id);
+                //switch (obj.event) {
+                //    case 'add':
+                //        var data = checkStatus.data;
+                //        layer.alert(JSON.stringify(data));
+                //        break;
+                //    case 'batchdel':
+                //        var data = checkStatus.data;
+                //        layer.msg('选中了：' + data.length + ' 个');
+                //        break;
+                //};
+                if (obj.event == 'add') {
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+                if (obj.event == 'batchdel') {
+                    layer.confirm('真的删除吗，此操作不能撤销！', function (index) {
+                        var arr = [];
+                        var data = checkStatus.data;
+                        for (var i = 0; i < data.length; i++) {    //循环筛选出id
+                            arr.push(data[i].Id);
+                            layer.alert(data[i].Id)
+                        }
+                        //向服务端发送删除指令
+                        layui.$.post(
+                            '/Consult/BatchDeletConsult',
+                            { arr: arr },
+                            function (data, status) {
+                                if (data.IsSuccess) {
+                                    layer.msg('删除成功!');
+                                    //更新数据
+                                    form_table.reload('consult_list', {
+                                        where: {
+                                            consult_id: $('#consult_id').val(),
+                                            consult_author: $('#consult_author').val(),
+                                            consult_title: $('#consult_title').val(),
+                                            consult_sm: $('#consult_sm').val(),
+                                        },
+                                        page: {
+                                            curr: 1
+                                        }
+                                    });
+                                }
+                                else {
+                                    layer.msg('删除失败:' + data.ErrorInfo);
+                                }
+                            }
+                        )
+                    });
+                }
+            });
+            //监听工具条
+            form_table.on('tool(consult_list)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+                if (layEvent == 'edit') {
+                    layer.open({
+                        type: 2,
+                        title: '编辑文章',
+                        content: '/Consult/Type',
+                        area: ['700px', '450px']
+                    })
+                }
+                if (layEvent == 'del') {
+                    layer.confirm('真的删除吗，此操作不能撤销！', function (index) {
+                        //向服务端发送删除指令
+                        layui.$.post(
+                            '/Consult/DeleteConsult',
+                            { id: data.Id },
+                            function (data, status) {
+                                if (data.IsSuccess) {
+                                    layer.msg('删除成功!');
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(index);
+                                }
+                                else {
+                                    layer.msg('删除失败:' + data.ErrorInfo);
+                                }
+                            }
+                        )
+                    });
+                }
+            });
+        });
 
 
     </script>
-
-
-
-
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layuiadmin-btn-list" lay-event="batchdel" data-type="batchdel">删除</button>
+            <button class="layui-btn layuiadmin-btn-list" lay-event="add" data-type="add">添加</button>
+        </div>
+    </script>
+    <script type="text/html" id="table_sm">
+        <div>
+            <span lay-data="{{d.Sm_Id}}">{{d.Sm_Name}}</span>
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script type="text/html" id="ReleaseDate">
+        {{fmtDate(d.ReleaseDate) === undefined?"-":fmtDate(d.ReleaseDate)}}
+    </script>
+    <script type="text/html" id="UpdateDate">
+        {{fmtDate(d.UpdateDate) === undefined?"-":fmtDate(d.UpdateDate)}}
+    </script>
     <style id="LAY_layadmin_theme">
         .layui-side-menu, .layadmin-pagetabs .layui-tab-title li:after, .layadmin-pagetabs .layui-tab-title li.layui-this:after, .layui-layer-admin .layui-layer-title, .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > .layui-nav-child {
             background-color: #20222A !important;

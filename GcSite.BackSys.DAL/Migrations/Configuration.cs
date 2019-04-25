@@ -10,6 +10,7 @@ namespace GcSite.BackSys.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(GcSite.BackSys.DAL.GcSiteDb context)

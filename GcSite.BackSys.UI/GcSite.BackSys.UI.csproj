@@ -148,6 +148,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConsultController.cs" />
+    <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
@@ -275,6 +276,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="module\treetable-lay\treetable.css" />
+    <Content Include="module\treetable-lay\treetable.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -284,6 +287,7 @@
     <Content Include="Content\layui\layui\font\iconfont.eot" />
     <Content Include="Content\layui\layui\font\iconfont.ttf" />
     <Content Include="Content\layui\layui\font\iconfont.woff" />
+    <Content Include="json\data.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -308,11 +312,13 @@
     <Content Include="Views\Consult\List.cshtml" />
     <Content Include="Views\Product\List.cshtml" />
     <Content Include="Views\Product\Type.cshtml" />
+    <Content Include="Views\Consult\Type.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Helper\" />
     <Folder Include="Views\SysAdmin\" />
   </ItemGroup>
   <ItemGroup>

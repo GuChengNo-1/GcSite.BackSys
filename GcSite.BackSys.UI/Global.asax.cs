@@ -20,7 +20,7 @@ namespace GcSite.BackSys.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //当models发生改变时修改数据库
-            DataBaseManage.SetInitializer();
+            //DataBaseManage.SetInitializer();
         }
     }
 }

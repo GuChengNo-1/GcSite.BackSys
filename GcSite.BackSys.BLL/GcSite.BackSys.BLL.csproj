@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GcSite.BackSys.Common\GcSite.BackSys.Common.csproj">
+      <Project>{5E614E89-3011-4129-831C-645D89686D66}</Project>
+      <Name>GcSite.BackSys.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GcSite.BackSys.DAL\GcSite.BackSys.DAL.csproj">
       <Project>{3359977a-8de0-4929-ac85-15205f9e0ef1}</Project>
       <Name>GcSite.BackSys.DAL</Name>

@@ -36,10 +36,10 @@ namespace GcSite.BackSys.Models
         /// <summary>
         /// 发布人(外键)
         /// </summary>
-        public UserInfo User { get; set; }
+        public virtual UserInfo User { get; set; }
         /// <summary>
         /// 新闻类型(外键)
         /// </summary>
-        public NewsType Type { get; set; }
+        public virtual NewsType Type { get; set; }
     }
 }

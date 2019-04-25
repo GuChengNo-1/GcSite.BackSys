@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace GcSite.BackSys.Models
         /// </summary>
         [Required(ErrorMessage = "发布人不能为空")]
         [Display(Name = "发布人")]
-        public UserInfo User { get; set; }
+        public virtual UserInfo User { get; set; }
         /// <summary>
         /// 发布日期
         /// </summary>
