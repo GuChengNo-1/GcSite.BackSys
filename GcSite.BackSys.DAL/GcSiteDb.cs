@@ -5,7 +5,7 @@ using System.Text;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using GcSite.BackSys.Models;
-using GcSite.BackSys.DAL.Migrations;
+//using GcSite.BackSys.DAL.Migrations;
 
 namespace GcSite.BackSys.DAL
 {

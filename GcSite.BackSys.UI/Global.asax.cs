@@ -1,5 +1,4 @@
 ﻿using GcSite.BackSys.BLL;
-using GcSite.BackSys.DAL;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
