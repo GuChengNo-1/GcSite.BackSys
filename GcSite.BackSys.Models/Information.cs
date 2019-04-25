@@ -23,7 +23,7 @@ namespace GcSite.BackSys.Models
         /// </summary>
         [Required(ErrorMessage = "发布人不能为空")]
         [Display(Name = "发布人")]
-        public UserInfo User { get; set; }
+        public virtual UserInfo User { get; set; }
         /// <summary>
         /// 发布日期
         /// </summary>

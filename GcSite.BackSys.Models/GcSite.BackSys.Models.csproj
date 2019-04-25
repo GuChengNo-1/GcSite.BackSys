@@ -47,6 +47,7 @@
     <Compile Include="EntityBase.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="LgClass.cs" />
+    <Compile Include="MemoryCpu.cs" />
     <Compile Include="MessageInfo.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="NewsInfo.cs" />
