@@ -79,5 +79,25 @@ namespace GcSite.BackSys.Models
         /// </summary> 
         [Display(Name = "用户类型编号")]
         public virtual UserType Type { get; set; }
+        /// <summary>
+        /// 资讯
+        /// </summary>
+        public virtual ICollection<Information> Information { get; set; }
+        /// <summary>
+        /// 栏目
+        /// </summary>
+        public virtual ICollection<Programa> Programa { get; set; }
+        /// <summary>
+        /// 产品
+        /// </summary>
+        public virtual ICollection<ProductInfo> ProductInfo { get; set; }
+        /// <summary>
+        /// 招聘
+        /// </summary>
+        public virtual ICollection<Recruited> Recruited { get; set; }
+        /// <summary>
+        /// 友情链接
+        /// </summary>
+        public virtual ICollection<AdeverInfo> AdeverInfo { get; set; }
     }
 }

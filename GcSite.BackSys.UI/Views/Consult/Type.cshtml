@@ -1,0 +1,562 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>应用—内容系统—分类管理</title>
+    <link href="~/Content/layui/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/css/tai.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery.min.js"></script>
+</head>
+<body layadmin-themealias="default" class="layui-layout-body" style="">
+    <div id="LAY_app" class="layadmin-tabspage-none">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <div class="layui-logo">谷程后台</div>
+                <!-- 头部区域（可配合layui已有的水平导航） -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">其它系统</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">邮件管理</a></dd>
+                            <dd><a href="">消息管理</a></dd>
+                            <dd><a href="">授权管理</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="http://t.cn/RCzsdCq" class="layui-nav-img" alt="">
+                            贤心
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">基本资料</a></dd>
+                            <dd><a href="">安全设置</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">退了</a></li>
+                </ul>
+            </div>
+
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-bg-black">
+                <div class="layui-side-scroll">
+                    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                    <ul class="layui-nav layui-nav-tree" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu" lay-shrink="all">
+                        <li class="layui-nav-item" data-jump="" data-name="">
+                            <a href="javascript:;" lay-direction="2" lay-tips="主页">
+                                <i class="layui-icon layui-icon-home"></i>
+                                <cite>主页</cite>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item" data-jump="" data-name="app">
+                            <a href="javascript:;" lay-direction="2" lay-tips="应用"> <i class="layui-icon layui-icon-app"></i> <cite>应用</cite> <span class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <dd data-jump="" data-name="content">
+                                    <a href="javascript:;">内容系统<span class="layui-nav-more"></span></a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="list">
+                                            <a href="javascript:;" lay-href="app/content/list">文章列表</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="tags">
+                                            <a href="javascript:;" lay-href="app/content/tags">分类管理</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd data-jump="" data-name="forum">
+                                    <a href="javascript:;">产品系统<span class="layui-nav-more"></span></a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="list">
+                                            <a href="javascript:;"
+                                               lay-href="app/forum/list">帖子列表</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="replys">
+                                            <a href="javascript:;" lay-href="app/forum/replys">回帖列表</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd data-jump="" data-name="message"><a href="javascript:;" lay-href="app/message/">图片系统</a></dd>
+                                <dd data-jump="" data-name="message"><a href="javascript:;" lay-href="app/message/">广告系统</a></dd>
+                                <dd data-jump="" data-name="message"><a href="javascript:;" lay-href="app/message/">营销系统</a></dd>
+                                <dd data-jump="app/workorder/list" data-name="workorder">
+                                    <a href="javascript:;" lay-href="app/workorder/list">留言系统</a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item" data-jump="" data-name="user">
+                            <a href="javascript:;" lay-direction="2"
+                               lay-tips="用户">
+                                <i class="layui-icon layui-icon-user"></i> <cite>用户</cite> <span class="layui-nav-more"></span>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd data-jump="user/administrators/list" data-name="administrators-list">
+                                    <a href="javascript:;" lay-href="user/administrators/list">后台管理员</a>
+                                </dd>
+                                <dd data-jump="user/administrators/role" data-name="administrators-rule">
+                                    <a href="javascript:;"
+                                       lay-href="user/administrators/role">角色管理</a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item" data-jump="" data-name="set">
+                            <a href="javascript:;" lay-direction="2" lay-tips="设置">
+                                <i class="layui-icon layui-icon-set"></i> <cite>设置</cite> <span class="layui-nav-more"></span>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd class="layui-nav-itemed" data-jump="" data-name="system">
+                                    <a href="javascript:;">
+                                        栏目设置<span class="layui-nav-more"></span>
+                                    </a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="website">
+                                            <a href="javascript:;"
+                                               lay-href="set/system/website">网站设置</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="email">
+                                            <a href="javascript:;" lay-href="set/system/email">邮件服务</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd class="layui-nav-itemed" data-jump="" data-name="system">
+                                    <a href="javascript:;">
+                                        系统设置<span class="layui-nav-more"></span>
+                                    </a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="website">
+                                            <a href="javascript:;"
+                                               lay-href="set/system/website">网站设置</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="email">
+                                            <a href="javascript:;" lay-href="set/system/email">邮件服务</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd class="layui-nav-itemed" data-jump="" data-name="system">
+                                    <a href="javascript:;">
+                                        友情链接设置<span class="layui-nav-more"></span>
+                                    </a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="website">
+                                            <a href="javascript:;"
+                                               lay-href="set/system/website">网站设置</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="email">
+                                            <a href="javascript:;" lay-href="set/system/email">邮件服务</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd class="layui-nav-itemed" data-jump="" data-name="user">
+                                    <a href="javascript:;">
+                                        底部信息设置<span class="layui-nav-more"></span>
+                                    </a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="info">
+                                            <a href="javascript:;"
+                                               lay-href="set/user/info">基本资料</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="password">
+                                            <a href="javascript:;"
+                                               lay-href="set/user/password">修改密码</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                                <dd class="layui-nav-itemed" data-jump="" data-name="user">
+                                    <a href="javascript:;">
+                                        我的设置<span class="layui-nav-more"></span>
+                                    </a>
+                                    <dl class="layui-nav-child">
+                                        <dd data-jump="" data-name="info">
+                                            <a href="javascript:;"
+                                               lay-href="set/user/info">基本资料</a>
+                                        </dd>
+                                        <dd data-jump="" data-name="password">
+                                            <a href="javascript:;"
+                                               lay-href="set/user/password">修改密码</a>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                    <span class="layui-nav-bar" style="top: 252px; height: 0px; opacity: 0;"></span>
+                </div>
+
+            </div>
+
+
+            <!-- 页面标签 -->
+            <script type="text/html" template="" lay-done="layui.element.render('nav', 'layadmin-pagetabs-nav')">
+                {{# if(layui.setter.pageTabs){ }}
+                <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                    <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                    <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                    <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                        <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                            <li class="layui-nav-item" lay-unselect>
+                                <a href="javascript:;"></a>
+                                <dl class="layui-nav-child layui-anim-fadein">
+                                    <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                    <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                    <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                        <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                            <li lay-id="/"><i class="layui-icon layui-icon-home"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                {{# } }}
+            </script>
+
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    <div class="layui-card layadmin-header">
+                        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+                            <a lay-href="">主页</a><span lay-separator="">/</span>
+                            <a><cite>应用</cite></a><span lay-separator="">/</span>
+                            <a><cite>分类管理</cite></a>
+                        </div>
+                    </div><div class="layui-fluid">
+                        <div class="layui-card">
+                            <div class="layui-card-header layuiadmin-card-header-auto">
+                                <button class="layui-btn layuiadmin-btn-tags" id="btn-add">添加一级分类</button>
+                                <div class="layui-btn-group">
+                                    <button class="layui-btn" id="btn-expand">全部展开</button>
+                                    <button class="layui-btn" id="btn-fold">全部折叠</button>
+                                    <button class="layui-btn" id="btn-refresh">刷新表格</button>
+                                </div>
+                                <span class="layui-bg-gray">排序越小越靠前</span>
+                            </div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="consult_type" lay-filter="consult_type"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 辅助元素，一般用于移动设备下遮罩 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+
+        </div>
+    </div>
+    <script src="~/Content/layui/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: '../dist/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
+            , version: '1.2.1'
+        }).use('index');
+
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
+        layui.config({
+            base: '/module/'
+        }).extend({
+            treetable: 'treetable-lay/treetable'
+        }).use(['layer', 'table', 'treetable'], function () {
+            var $ = layui.jquery;
+            var table = layui.table;
+            var layer = layui.layer;
+            var treetable = layui.treetable;
+
+            //渲染表格
+            var renderTable = function () {
+                layer.load(2);
+                $.get('/Consult/TypeTree', function (res) {
+                    console.log(res.data);
+                    treetable.render({
+                        treeColIndex: 1,
+                        treeSpid: 0,
+                        treeIdName: 'Id',
+                        treePidName: 'Pid',
+                        treeDefaultClose: false,
+                        treeLinkage: false,
+                        elem: '#consult_type',
+                        data: res.data,
+                        page: false,
+                        cols: [[
+                            { type: 'numbers' },
+                            { field: 'C_Id', title: '分类Id', align: 'center' },
+                            { field: 'Name', title: '分类名', edit: 'text', align: 'left' },
+                            { field: 'Sort', title: '排序', edit: 'text', align: 'center' },
+                            { field: 'Sign', title: '标识', edit: 'text', align: 'center' },
+                            { field: 'Describe', title: '描述', edit: 'text', align: 'center' },
+                            { templet: '#barDemo', title: '操作', align: 'right'  }
+                        ]],
+                        done: function () {
+                            layer.closeAll('loading');
+                        }
+                    });
+                }, 'json');
+            };
+
+            renderTable();
+
+            $('#btn-expand').click(function () {
+                treetable.expandAll('#consult_type');
+            });
+
+            $('#btn-fold').click(function () {
+                treetable.foldAll('#consult_type');
+            });
+
+            $('#btn-refresh').click(function () {
+                renderTable();
+            });
+            $('#btn-add').click(function () {
+
+            })
+            //监听工具条
+            table.on('tool(consult_type)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+
+                if (layEvent === 'del') {
+                    layer.confirm('你确定删除数据吗？如果存在下级节点并且分类关联数据则一并删除，此操作不能撤销！', function (index) {
+                        layer.msg('删除' + data.C_Id);
+                        //向服务端发送删除指令
+                        layui.$.post(
+                            '/Consult/DeleteType',
+                            {
+                                p_id: data.C_Id,
+                                f_id: data.P_Id
+                            },
+                            function (data, status) {
+                                console.log(data.IsSuccess);
+                                if (data.IsSuccess) {
+                                    layer.msg('删除成功!');
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(index);
+                                    renderTable();
+                                }
+                                else {
+                                    layer.msg('删除失败:' + data.ErrorInfo);
+                                }
+                            }
+                        )
+                    });
+                } else if (layEvent === 'save') {
+                    layer.msg('保存' + data.C_Id);
+                }
+            });
+        });
+
+
+    </script>
+
+    <script type="text/html" id="barDisplay">
+        {{#  if(d.Display == 0){ }}
+        <select name="">
+            <option value="">是</option>
+            <option value="0">否</option>
+        </select>
+        {{#  } else { }}
+        <select name="">
+            <option value="">是</option>
+            <option value="0">否</option>
+        </select>
+        {{#  } }}
+    </script>
+    <script type="text/html" id="barDemo">
+        {{#  if(d.Pid == 0){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="add">添加子类</a>
+        <a class="layui-btn layui-btn-xs" lay-event="save">保存</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        {{#  } else { }}
+        <a class="layui-btn layui-btn-xs" lay-event="save">保存</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        {{#  } }}
+    </script>
+    @*<script>
+        var editObj = null, ptable = null, treeGrid = null, tableId = 'treeTable', layer = null;
+        layui.config({
+            base: '/design/extend/'
+        }).extend({
+            treeGrid: 'treeGrid'
+        }).use(['jquery', 'treeGrid', 'layer'], function () {
+            var $ = layui.jquery;
+            treeGrid = layui.treeGrid;//很重要
+            layer = layui.layer;
+            ptable = treeGrid.render({
+                id: consult_type
+                , elem: '#consult_type'
+                , url: '/consult/TypeTree'
+                , cellMinWidth: 100
+                , idField: 'Id'//必須字段
+                , treeId: 'Id'//树形id字段名称
+                , treeUpId: 'Pid'//树形父id字段名称
+                , treeShowName: 'Name'//以树形式显示的字段
+                , heightRemove: [".dHead", 10]//不计算的高度,表格设定的是固定高度，此项不生效
+                , height: '100%'
+                , isFilter: false
+                , iconOpen: false//是否显示图标【默认显示】
+                , isOpenDefault: false//节点默认是展开还是折叠【默认展开】
+                , loading: true
+                , method: 'get'
+                , isPage: false
+                , cols: [[
+                    { type: 'numbers' }
+                    , { type: 'radio' }
+                    , { type: 'checkbox', sort: true }
+                    , { field: 'Name', width: 300, title: 'name'/*, edit: 'text'*/, sort: true }
+                    , { field: 'Id', width: 100, title: 'id', sort: true }
+                    , { field: 'Pid', title: 'pid', sort: true }
+                    , {
+                        width: 100, title: '操作', align: 'center'/*toolbar: '#barDemo'*/
+                        , templet: function (d) {
+                            var html = '';
+                            var addBtn = '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">添加</a>';
+                            var delBtn = '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
+                            return addBtn + delBtn;
+                        }
+                    }
+                ]]
+                , parseData: function (res) {//数据加载后回调
+                    return res;
+                }
+                , onClickRow: function (index, o) {
+                    console.log(index, o, "单击！");
+                    //msg("单击！,按F12，在控制台查看详细参数！");
+                }
+                , onDblClickRow: function (index, o) {
+                    console.log(index, o, "双击");
+                    msg("双击！,按F12，在控制台查看详细参数！");
+                }
+                , onCheck: function (obj, checked, isAll) {//复选事件
+                    console.log(obj, checked, isAll, "复选");
+                    msg("复选,按F12，在控制台查看详细参数！");
+                }
+                , onRadio: function (obj) {//单选事件
+                    console.log(obj, "单选");
+                    msg("单选,按F12，在控制台查看详细参数！");
+                }
+            });
+
+            treeGrid.on('tool(' + tableId + ')', function (obj) {
+                if (obj.event === 'del') {//删除行
+                    del(obj);
+                } else if (obj.event === "add") {//添加行
+                    add(obj);
+                }
+            });
+        });
+
+        function del(obj) {
+            layer.confirm("你确定删除数据吗？如果存在下级节点则一并删除，此操作不能撤销！", { icon: 3, title: '提示' },
+                function (index) {//确定回调
+                    obj.del();
+                    layer.close(index);
+                }, function (index) {//取消回调
+                    layer.close(index);
+                }
+            );
+        }
+
+
+        var i = 1000000;
+        //添加
+        function add(pObj) {
+            var pdata = pObj ? pObj.data : null;
+            var param = {};
+            param.name = '水果' + Math.random();
+            param.id = ++i;
+            param.pId = pdata ? pdata.id : null;
+            treeGrid.addRow(tableId, pdata ? pdata[treeGrid.config.indexName] + 1 : 0, param);
+        }
+
+        function print() {
+            console.log(treeGrid.cache[tableId]);
+            msg("对象已打印，按F12，在控制台查看！");
+        }
+
+        function msg(msg) {
+            var loadIndex = layer.msg(msg, {
+                time: 3000
+                , offset: 'b'//顶部
+                , shade: 0
+            });
+        }
+
+        function openorclose() {
+            var map = treeGrid.getDataMap(tableId);
+            var o = map['102'];
+            treeGrid.treeNodeOpen(tableId, o, !o[treeGrid.config.cols.isOpen]);
+        }
+
+
+        function openAll() {
+            var treedata = treeGrid.getDataTreeList(tableId);
+            treeGrid.treeOpenAll(tableId, !treedata[0][treeGrid.config.cols.isOpen]);
+        }
+
+        function getCheckData() {
+            var checkStatus = treeGrid.checkStatus(tableId)
+                , data = checkStatus.data;
+            layer.alert(JSON.stringify(data));
+        }
+        function radioStatus() {
+            var data = treeGrid.radioStatus(tableId)
+            layer.alert(JSON.stringify(data));
+        }
+        function getCheckLength() {
+            var checkStatus = treeGrid.checkStatus(tableId)
+                , data = checkStatus.data;
+            layer.msg('选中了：' + data.length + ' 个');
+        }
+
+        function reload() {
+            treeGrid.reload(tableId, {
+                page: {
+                    curr: 1
+                }
+            });
+        }
+        function query() {
+            treeGrid.query(tableId, {
+                where: {
+                    name: 'sdfsdfsdf'
+                }
+            });
+        }
+
+        function test() {
+            console.log(treeGrid.cache[tableId], treeGrid.getClass(tableId));
+
+
+            /*var map=treeGrid.getDataMap(tableId);
+            var o= map['102'];
+            o.name="更新";
+            treeGrid.updateRow(tableId,o);*/
+        }
+    </script>*@
+
+
+    <style id="LAY_layadmin_theme">
+        .layui-side-menu, .layadmin-pagetabs .layui-tab-title li:after, .layadmin-pagetabs .layui-tab-title li.layui-this:after, .layui-layer-admin .layui-layer-title, .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > .layui-nav-child {
+            background-color: #20222A !important;
+        }
+
+        .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a {
+            background-color: #009688 !important;
+        }
+
+        .layui-layout-admin .layui-logo {
+            background-color: #20222A !important;
+        }
+    </style><div class="layui-layer-move"></div>
+</body>
+</html>
